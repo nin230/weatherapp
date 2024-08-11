@@ -9,6 +9,7 @@ export default function Weather(){
     const[weatherData,setweatherData]= useState(null);
 
     async function fetchWeatherData(param){
+        setLoading(true);
         try{
             const response = await fetch(
                 `https://api.openweathermap.org/data/2.5/weather?q=${param}&appid=f6e8392d478d66e3d7ffcbc63289c58d`
@@ -16,8 +17,13 @@ export default function Weather(){
 
             const data = await response.json();
             console.log(data,'data');
+            if(data){ 
+                setweatherData(data);
+                setLoading(false);
+            }
         }
         catch(e){
+            setLoading(false);
             console.log(e); 
         }
     }
@@ -25,6 +31,7 @@ export default function Weather(){
     async function handleSearch(){
        fetchWeatherData(search)
     }
+    console.log(loading);
     return <div>
         <Search 
         search={search}
