@@ -9,6 +9,7 @@ export default function Weather(){
     const[weatherData,setweatherData]= useState(null);
 
     async function fetchWeatherData(param){
+        setLoading(true);
         try{
             const response = await fetch(
                 `https://api.openweathermap.org/data/2.5/weather?q=${param}&appid=f6e8392d478d66e3d7ffcbc63289c58d`
